@@ -6,6 +6,7 @@ pdf2image
 psycopg2-binary
 langchain-community
 langchain_ollama
+langchain-google-genai
 opencv-python
 pandas
 google-cloud-storage

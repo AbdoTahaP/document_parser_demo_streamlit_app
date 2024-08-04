@@ -72,7 +72,7 @@ def __detect_checkboxes(page: np.ndarray, min_scale = 22e-5, max_scale = 50e-5, 
 
 
 def get_raw_text_from_pages(page, filename: str, page_num: int = 1, save_images: bool = False, filter: bool = False):
-    checkboxes = __detect_checkboxes(page)
+    # checkboxes = __detect_checkboxes(page)
     if filter:
         filtered_page = filter_color(
                             page, np.array([0, 0, 0]), np.array([179, 100, 130])
@@ -80,9 +80,9 @@ def get_raw_text_from_pages(page, filename: str, page_num: int = 1, save_images:
         result: list = __extract_text(filtered_page)
     else:
         result: list = __extract_text(page)
-    if checkboxes:
-        result.extend(checkboxes)
-        result = sorted(result, key= lambda x: x[0][0][1])
+    # if checkboxes:
+    #     result.extend(checkboxes)
+    #     result = sorted(result, key= lambda x: x[0][0][1])
     if save_images:
         out_folder='out'
         os.makedirs(out_folder, exist_ok=True)

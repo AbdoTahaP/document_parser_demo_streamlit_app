@@ -1,6 +1,8 @@
 from typing import Tuple
 import os
 import cv2
+import base64
+from io import BytesIO
 from datetime import datetime
 from pathlib import Path
 import numpy as np
@@ -24,6 +26,18 @@ def convert_pdf_to_image(filename: str | Path | bytes, size: Tuple[int, int] | i
         return []
     return [np.asarray(page) for page in pdf_pages]
 
+def convert_to_base64(pil_image):
+    """
+    Convert PIL images to Base64 encoded strings
+
+    :param pil_image: PIL image
+    :return: Re-sized Base64 string
+    """
+
+    buffered = BytesIO()
+    pil_image.save(buffered, format="PNG")  # You can change the format if needed
+    img_str = base64.b64encode(buffered.getvalue()).decode("utf-8")
+    return img_str
 
 def filter_color(img, lower_val, upper_val):
     hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
