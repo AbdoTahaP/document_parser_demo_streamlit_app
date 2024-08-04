@@ -1,7 +1,0 @@
-data
-.dockerignore
-.env
-dpenv
-*.csv
-*.png
-*.json
