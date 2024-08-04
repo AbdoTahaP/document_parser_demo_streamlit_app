@@ -1,0 +1,61 @@
+version: "3"
+services:
+  ollama:
+    image: ollama/ollama
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    volumes:
+      - ./data/ollama:/root/.ollama
+    ports:
+      - 11434:11434
+  dpapp:
+    # image: dpapp
+    build:
+      context: .
+      dockerfile: Dockerfile
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: all
+    #           capabilities: [gpu]
+    environment:
+      GOOGLE_APPLICATION_CREDENTIALS: "wired-framework-394206-2100305d4d8b.json"
+      GCP_BUCKET_NAME: "business_document_bucket_einvoice_dev"
+      COMPANY_ID: "7"
+      TITLE: "Pintar AI"
+    # ports:
+    #   - 8501:8501
+    depends_on:
+      - ollama
+    network_mode: "host"
+
+  dpapp-dev:
+    # image: dpapp
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: all
+    #           capabilities: [gpu]
+    environment:
+      GOOGLE_APPLICATION_CREDENTIALS: "wired-framework-394206-2100305d4d8b.json"
+      GCP_BUCKET_NAME: "business_document_bucket_einvoice_dev"
+      COMPANY_ID: "63"
+      TITLE: "Pintar AI Dev"
+      GEMINI_API_KEY: "AIzaSyAqnzNLU5xEUQoZNZq79c8-HdMg2PaHZbY"
+    # ports:
+    #   - 8501:8501
+    depends_on:
+      - ollama
+    network_mode: "host"

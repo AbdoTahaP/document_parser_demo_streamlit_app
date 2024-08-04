@@ -1,0 +1,7 @@
+swig
+openssl
+libssl-dev
+python3-opencv
+libpoppler-dev
+libpoppler-cpp-dev
+poppler-utils

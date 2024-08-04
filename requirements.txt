@@ -1,0 +1,13 @@
+paddlepaddle-gpu==2.6.1 -i https://mirror.baidu.com/pypi/simple
+paddleocr>=2.0.1
+streamlit
+python-dotenv
+pdf2image
+psycopg2-binary
+langchain-community
+langchain_ollama
+opencv-python
+pandas
+google-cloud-storage
+google-generativeai
+python-dateutil
